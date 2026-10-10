@@ -13,7 +13,10 @@ int main() {
     ajouter_debut(lc,89);
     ajouter_debut(lc,7);
     assert(lc -> valeur == 7);
-    liberer_liste_chainee(lc);
-    assert(lc);
+    //liberer_liste_chainee(lc);
+    //assert(lc == NULL);
+    assert(rechercher_lc(lc, 89) == lc -> suivant);
+    supprimer_lc(lc, 10);
+    assert(rechercher_lc(lc, 10) == NULL);
     return 0;
 }

@@ -11,3 +11,10 @@ add_executable(TP2___Tables_de_hachage
         liste.h
         liste_chainee.h
         main.c)
+
+enable_testing()
+
+add_test(
+        NAME test_liste_chainee
+        COMMAND test_liste_chaine
+)
