@@ -9,10 +9,9 @@
  * @returns une liste chaînée vide
  */
 ListeChainee liste_chainee_vide() {
-    ListeChainee l = malloc(sizeof(struct Noeud));
-    l -> suivant = NULL;
-    return l;
+   return NULL;
 }
+
 
 
 
@@ -27,12 +26,22 @@ ListeChainee liste_chainee_vide() {
  * la suite est donnée par l.
  */
 ListeChainee ajouter_debut(ListeChainee l, type_base x) {
-    ListeChainee nouvelle_liste_chainee = liste_chainee_vide();
+    ListeChainee nouvelle_liste_chainee = malloc(sizeof(*nouvelle_liste_chainee));
 
-    nouvelle_liste_chainee -> valeur = l -> valeur;
-    nouvelle_liste_chainee -> suivant = l -> suivant;
-    l -> valeur = x;
-    l -> suivant = nouvelle_liste_chainee;
+    if (nouvelle_liste_chainee == NULL) {
+        exit(-1);
+    }
+    
+    if (l == NULL) {
+        l = malloc(sizeof(*l)) ;
+        l -> valeur = x;
+        l -> suivant = NULL;
+    } else {
+        nouvelle_liste_chainee -> valeur = l -> valeur;
+        nouvelle_liste_chainee -> suivant = l -> suivant;
+        l -> valeur = x;
+        l -> suivant = nouvelle_liste_chainee;
+    }
     return l;
 }
 
@@ -109,3 +118,40 @@ ListeChainee supprimer_lc(ListeChainee l, type_base x) {
 
 
 
+/**
+ * @brief Supprime le premier noeud de la chaîne et renvoie sa valeur. \n
+ * La mémoire allouée pour ce premier noeud est également libérée. \n
+ * **Complexité :** O(1)
+ * @param adr_l, pointeur vers une liste chaînée supposée non nulle.
+ * La liste pointée par adr_l est modifiée de sorte à ce que l'élément de
+ * tête soit supprimé.
+ * @returns la valeur du premier noeud de la liste pointée par adr_l.
+ */
+type_base extraire_premier(ListeChainee* adr_l) {
+    ListeChainee premier_element = *adr_l;
+    type_base valeur = premier_element -> valeur;
+
+    *adr_l = premier_element -> suivant;
+    free(premier_element);
+    return valeur;
+}
+
+
+
+/**
+ * @brief Convertit une liste chaînée en une liste (voir TP précédent). \n
+ * La liste chaînée n'est pas modifiée. \n
+ * **Complexité :** O(taille de la liste chaînée)
+ * @param l une liste chaînée.
+ * @returns une liste qui contient les mêmes éléments que **l**.
+ */
+Liste liste_chainee_vers_liste(ListeChainee l) {
+
+    Liste liste = liste_vide();
+
+    while (l != NULL) {
+        ajouter_en_fin(liste, l -> valeur);
+        l = l -> suivant;
+    }
+    return liste;
+}
