@@ -47,25 +47,29 @@ Ensemble redimensioner(Ensemble e, type_base x) {
     size_t nouvelle_alveole = ancienne_alveole * 2;
 
     ListeChainee* ancien_table = e -> table;
-    ListeChainee* nouveau_table  = calloc(nouvelle_alveole, nouvelle_alveole * sizeof(nouveau_table));
+    ListeChainee* nouvelle_table  = calloc(nouvelle_alveole,    sizeof(*nouvelle_table));
     e -> nb_alveoles = nouvelle_alveole;
 
     for (size_t i = 0; i < ancienne_alveole; i++) {
-        ListeChainee alveole_courant = e -> table[i];
+        ListeChainee courant = e -> table[i];
 
-        while (alveole_courant != NULL) {
-            size_t nouveau_hash = alveole(e, x);
+        while (courant != NULL) {
+            ListeChainee suivant = courant->suivant;
+            size_t h = alveole(e, courant->valeur);
 
-            alveole_courant -> suivant = nouveau_table[nouveau_hash];
-            e -> table[nouveau_hash] = alveole_courant;
-            alveole_courant = alveole_courant -> suivant;
+            courant->suivant = nouvelle_table[h];
+            nouvelle_table[h] = courant;
+
+            courant = suivant;
         }
     }
-    e -> table = nouveau_table;
+    e -> table = nouvelle_table;
     free(ancien_table);
 
     return e;
 }
+
+
 
 
 /**

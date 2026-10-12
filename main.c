@@ -47,7 +47,7 @@ int main() {
     assert(e -> table[1] -> valeur == 6);
     ajouter(e,7);
     ajouter(e,8);
-    assert(e -> table[2] -> valeur == 2);
+    assert(e -> table[0] -> valeur == 2);
     ajouter(e,14);
     ajouter(e,10);
     ajouter(e,37);
