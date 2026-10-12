@@ -13,6 +13,14 @@ void afficher_liste (Liste l) {
     printf("]\n");
 }
 
+void afficher_table_hachage(Ensemble e) {
+    for (type_base i = 0; i < e ->nb_alveoles; i++) {
+
+        printf("Element : %d", i);
+        printf("\n");
+        afficher_liste(liste_chainee_vers_liste(e -> table[i]));
+    }
+}
 
 
 int main() {
@@ -48,8 +56,25 @@ int main() {
     ajouter(e,7);
     ajouter(e,8);
     assert(e -> table[0] -> valeur == 2);
+
     ajouter(e,14);
-    ajouter(e,10);
-    ajouter(e,37);
+    ajouter(e,43);
+    ajouter(e,56);
+    ajouter(e,78);
+    ajouter(e,89);
+    ajouter(e,33);
+    ajouter(e,58);
+    ajouter(e,76);
+    ajouter(e,21);
+    ajouter(e,59);
+    ajouter(e,32);
+    ajouter(e,45);
+    ajouter(e,6);
+    ajouter(e,40);
+    ajouter(e,5);
+    ajouter(e,5);
+    ajouter(e,9);
+    ajouter(e,7);
+    afficher_table_hachage(e);
     return 0;
 }

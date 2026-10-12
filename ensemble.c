@@ -42,12 +42,12 @@ size_t alveole(Ensemble e, type_base x) {
     return alveole;
 }
 
-Ensemble redimensioner(Ensemble e, type_base x) {
+Ensemble redimensioner(Ensemble e) {
     size_t ancienne_alveole = e -> nb_alveoles;
     size_t nouvelle_alveole = ancienne_alveole * 2;
 
     ListeChainee* ancien_table = e -> table;
-    ListeChainee* nouvelle_table  = calloc(nouvelle_alveole,    sizeof(*nouvelle_table));
+    ListeChainee* nouvelle_table  = calloc(nouvelle_alveole,sizeof(*nouvelle_table));
     e -> nb_alveoles = nouvelle_alveole;
 
     for (size_t i = 0; i < ancienne_alveole; i++) {
@@ -57,9 +57,7 @@ Ensemble redimensioner(Ensemble e, type_base x) {
             ListeChainee suivant = courant->suivant;
             size_t h = alveole(e, courant->valeur);
 
-            courant->suivant = nouvelle_table[h];
-            nouvelle_table[h] = courant;
-
+            nouvelle_table[h] = ajouter_debut(nouvelle_table[h], courant->valeur);
             courant = suivant;
         }
     }
@@ -85,7 +83,7 @@ Ensemble redimensioner(Ensemble e, type_base x) {
 void ajouter(Ensemble e, type_base x) {
 
     if (e -> taille + 1 > e -> nb_alveoles / 2) {
-        e = redimensioner(e, x);
+        e = redimensioner(e);
     }
 
     type_base al = alveole(e, x);
