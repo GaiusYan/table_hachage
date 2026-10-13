@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   test:
-    runs-on: ubuntu-24.04 [Beta]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Récuperer le code
