@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: compiler le programme C
-        run: gcc -Wall -g liste_chainee.c ensemble.c liste.c main.c test_table_hachage
+        run: gcc -Wall -g  liste.c liste_chainee.c ensemble.c  main.c test_table_hachage
 
       - name: Exécuter les tests
         run: ./test_table_hachage
