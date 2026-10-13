@@ -1,0 +1,26 @@
+name: Les tests-unitaires
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-24.04 [Beta]
+
+    steps:
+      - name: Récuperer le code
+        uses: actions/checkout@v4
+
+      - name: compiler le programme C
+        run: gcc -Wall -g liste_chainee.c ensemble.c liste.c main.c test_table_hachage
+
+      - name: Exécuter les tests
+        run: ./test_table_hachage
+
+      - name: Nettoyage des fichiers générés
+        if: always()
+        run: rm -fm test_table_hachage
