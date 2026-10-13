@@ -92,3 +92,79 @@ void ajouter(Ensemble e, type_base x) {
 }
 
 
+/**
+ * @brief Détermine si un élément appartient à un ensemble \n
+ * **Complexité :** O(1) (en moyenne)
+ * @param e un ensemble,
+ * @param x une valeur qu'on recherche dans e.
+ * @returns **true** si x appartient dans e, **false** sinon.
+ */
+bool appartient(Ensemble e, type_base x) {
+    type_base al = alveole(e, x);
+
+    ListeChainee courant = e -> table[al] -> suivant;
+    while (courant != NULL) {
+        if (courant -> valeur == x) {
+            return true;
+        }
+        courant = courant->suivant;
+    }
+    return false;
+}
+
+
+Ensemble reduire_ensemble(Ensemble e) {
+    size_t ancienne_alveole = e -> nb_alveoles;
+    size_t nouvelle_alveole = (ancienne_alveole / 2) + 1;
+
+    ListeChainee* ancienne_table = e -> table;
+    ListeChainee* nouvelle_table = calloc(nouvelle_alveole, sizeof(*nouvelle_table));
+    e -> nb_alveoles = nouvelle_alveole;
+
+    for (size_t i = 0; i < ancienne_alveole; i++) {
+        ListeChainee courant = e -> table[i];
+        while (courant != NULL) {
+            ListeChainee suivant = courant->suivant;
+            size_t h = alveole(e, courant->valeur);
+
+            nouvelle_table[h] = ajouter_debut(nouvelle_table[h], courant->valeur);
+            courant = suivant;
+        }
+    }
+
+    free(ancienne_table);
+    return e;
+}
+
+/**
+ * @brief Supprime une occurrence d'un élément dans la table de hachage. \n
+ * Si jamais le nombre d'éléments devient inférieur au huitième du nombre d'alvéoles,
+ * on réallouera un nouvelle table de hachage où on a reduit de moitié le nombre d'alvéoles
+ * (sauf si le nombre d'alvéoles devient inférieur à 8). \n
+ * Déclenche une erreur si jamais la valeur n'est pas dans e. \n
+ * **Complexité :** O(1) (en moyenne et en amorti)
+ * @param e un ensemble,
+ * @param x une valeur dont on veut supprimer une occurrence dans e.
+ */
+void supprimer(Ensemble e, type_base x) {
+    if (e -> taille == e -> nb_alveoles / 8) {
+        reduire_ensemble(e);
+    }
+
+    type_base al = alveole(e, x);
+    e -> table[al] = supprimer_lc(e -> table[al], x);
+    e -> taille--;
+}
+
+
+
+/**
+ * @brief Libère la mémoire associée à un ensemble. \n
+ * On désallouera chaque liste chaînée, la table, ainsi que la structure elle-même.
+ * **Complexité :** O(1)
+ * @param e un ensemble.
+ */
+void liberer_ensemble(Ensemble e) {
+
+}
+

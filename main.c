@@ -76,5 +76,23 @@ int main() {
     ajouter(e,9);
     ajouter(e,7);
     afficher_table_hachage(e);
+    assert(appartient(e,58));
+    supprimer(e, 58);
+    supprimer(e,89);
+    //assert(appartient(e,89));
+    supprimer(e,33);
+    supprimer(e,58);
+    supprimer(e,76);
+    supprimer(e,21);
+    supprimer(e,59);
+    supprimer(e,32);
+    supprimer(e,45);
+    supprimer(e,6);
+    supprimer(e,40);
+    supprimer(e,5);
+    supprimer(e,5);
+    supprimer(e,9);
+    supprimer(e,7);
+    //afficher_table_hachage(e);
     return 0;
 }

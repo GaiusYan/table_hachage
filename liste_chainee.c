@@ -31,7 +31,7 @@ ListeChainee ajouter_debut(ListeChainee l, type_base x) {
     if (nouvelle_liste_chainee == NULL) {
         exit(-1);
     }
-    
+
     if (l == NULL) {
         l = malloc(sizeof(*l)) ;
         l -> valeur = x;
@@ -111,7 +111,9 @@ ListeChainee supprimer_lc(ListeChainee l, type_base x) {
         courant = courant -> suivant;
     }
 
-    precedent -> suivant = courant -> suivant;
+    if (courant != NULL) {
+        precedent -> suivant = courant -> suivant;
+    }
     free(courant);
     return l;
 }
