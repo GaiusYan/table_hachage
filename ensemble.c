@@ -166,5 +166,52 @@ void supprimer(Ensemble e, type_base x) {
  */
 void liberer_ensemble(Ensemble e) {
 
+    for (size_t i = 0; i < e -> nb_alveoles; i++) {
+        ListeChainee courant = e -> table[i];
+        while (courant != NULL) {
+            ListeChainee suivant = courant -> suivant;
+            free(courant);
+            courant = suivant;
+        }
+    }
+    free(e -> table);
+}
+
+
+/**
+ * @brief Convertit un ensemble en une liste (voir TP précédent) \n
+ * L'ensemble n'est pas modifié. \n
+ * **Complexité :** O(taille de l'ensemble)
+ * @param e un ensemble.
+ * @returns une liste contenant les mêmes éléments que **e** (l'ordre n'a
+ * pas d'importance).
+ */
+Liste ensemble_vers_liste(Ensemble e) {
+    Liste liste = liste_vide();
+    for (size_t i = 0; i < e -> nb_alveoles; i++) {
+        ListeChainee courant = e -> table[i];
+
+        while (courant != NULL) {
+            ajouter_en_fin(liste, courant->valeur);
+            courant = courant->suivant;
+        }
+    }
+    return liste;
+}
+
+/**
+ * @brief Convertit une liste en un ensemble. \n
+ * La liste n'est pas modifiée. \n
+ * **Complexité :** O(taille de la liste)
+ * @param l une liste.
+ * @returns un ensemble contenant les mêmes élements que **l**.
+ */
+Ensemble liste_vers_ensemble(Liste l) {
+    Ensemble e = ensemble_vide();
+
+    for (size_t i = 0; i < longueur(l) - 1; i++) {
+        ajouter(e, element(l,i));
+    }
+    return e;
 }
 

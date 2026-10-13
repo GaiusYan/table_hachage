@@ -41,7 +41,7 @@ int main() {
     assert(rechercher_lc(lc, 10) == NULL);
     extraire_premier(&lc);
     assert(rechercher_lc(lc, 7) == NULL);
-    afficher_liste(liste_chainee_vers_liste(lc));
+    //afficher_liste(liste_chainee_vers_liste(lc));
 
 
     // ensemble
@@ -75,13 +75,12 @@ int main() {
     ajouter(e,5);
     ajouter(e,9);
     ajouter(e,7);
-    afficher_table_hachage(e);
+    //afficher_table_hachage(e);
     assert(appartient(e,58));
     supprimer(e, 58);
     supprimer(e,89);
     //assert(appartient(e,89));
     supprimer(e,33);
-    supprimer(e,58);
     supprimer(e,76);
     supprimer(e,21);
     supprimer(e,59);
@@ -94,5 +93,10 @@ int main() {
     supprimer(e,9);
     supprimer(e,7);
     //afficher_table_hachage(e);
+    //liberer_ensemble(e);
+    //assert(appartient(e,2));
+    afficher_liste(ensemble_vers_liste(e));
+
+    afficher_table_hachage(e);
     return 0;
 }
