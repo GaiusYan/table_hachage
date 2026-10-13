@@ -42,8 +42,8 @@ Liste liste_vide() {
  * Complexité : O(1)
  * @param l liste */
 void liberer_liste(Liste l) {
-	free(l);
 	free(l -> tableau);
+	free(l);
 }
 
 

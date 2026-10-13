@@ -112,6 +112,11 @@ int main() {
     ajouter_en_fin(l,9);
     ajouter_en_fin(l,16);
     ajouter_en_fin(l,-2);
-    assert(fonction_nombre_amoureux_liste(l,8));
+    //assert(appartient(ensemble_amoureux,16));
+    //afficher_liste(l);
+    //afficher_table_hachage(ensemble_amoureux);
+    //assert(ensemble_amoureux -> table[9] -> valeur == 18);
+    assert(fonction_nombre_amoureux_liste(l) == 5);
+    test_nombre_amoureux(fonction_nombre_amoureux_liste,1000);
     return 0;
 }

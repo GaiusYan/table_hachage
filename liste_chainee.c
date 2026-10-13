@@ -112,6 +112,7 @@ ListeChainee supprimer_lc(ListeChainee l, type_base x) {
     }
 
     if (courant != NULL) {
+
         precedent -> suivant = courant -> suivant;
     }
     free(courant);

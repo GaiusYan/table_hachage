@@ -102,7 +102,7 @@ void ajouter(Ensemble e, type_base x) {
 bool appartient(Ensemble e, type_base x) {
     type_base al = alveole(e, x);
 
-    ListeChainee courant = e -> table[al] -> suivant;
+    ListeChainee courant = e -> table[al];
     while (courant != NULL) {
         if (courant -> valeur == x) {
             return true;
@@ -135,6 +135,8 @@ Ensemble reduire_ensemble(Ensemble e) {
     free(ancienne_table);
     return e;
 }
+
+
 
 /**
  * @brief Supprime une occurrence d'un élément dans la table de hachage. \n
@@ -206,11 +208,12 @@ Liste ensemble_vers_liste(Ensemble e) {
  * @param l une liste.
  * @returns un ensemble contenant les mêmes élements que **l**.
  */
-Ensemble liste_vers_ensemble(Liste l) {
+Ensemble  liste_vers_ensemble(Liste l) {
     Ensemble e = ensemble_vide();
 
-    for (size_t i = 0; i < longueur(l) - 1; i++) {
-        ajouter(e, element(l,i));
+    for (size_t i = 0; i < longueur(l); i++) {
+        int position = element(l,i);
+        ajouter(e, position);
     }
     return e;
 }
