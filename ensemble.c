@@ -215,3 +215,5 @@ Ensemble liste_vers_ensemble(Liste l) {
     return e;
 }
 
+
+

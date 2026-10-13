@@ -1,7 +1,7 @@
 # include <stdio.h>
 # include "liste_chainee.c"
 # include <assert.h>
-
+# include "amoureux.c"
 #include "ensemble.c"
 
 
@@ -95,8 +95,23 @@ int main() {
     //afficher_table_hachage(e);
     //liberer_ensemble(e);
     //assert(appartient(e,2));
-    afficher_liste(ensemble_vers_liste(e));
+    //afficher_liste(ensemble_vers_liste(e));
 
-    afficher_table_hachage(e);
+    //afficher_table_hachage(e);
+
+
+    // Test table amoureux
+    // Ajout des élements dans cette liste : [3,-1,8,4,18,0,9,16,-2]
+    Liste l = liste_vide();
+    ajouter_en_fin(l,3);
+    ajouter_en_fin(l,-1);
+    ajouter_en_fin(l,8);
+    ajouter_en_fin(l,4);
+    ajouter_en_fin(l,18);
+    ajouter_en_fin(l,0);
+    ajouter_en_fin(l,9);
+    ajouter_en_fin(l,16);
+    ajouter_en_fin(l,-2);
+    assert(fonction_nombre_amoureux_liste(l,8));
     return 0;
 }
